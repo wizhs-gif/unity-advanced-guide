@@ -13,50 +13,48 @@ export default function TutorialPage({ title, subtitle, chapters }) {
         <p className="page-subtitle">{subtitle}</p>
       </div>
 
-      <div className="tutorial-layout">
-        <nav className="tutorial-sidebar">
-          {chapters.map(ch => (
-            <button
-              key={ch.id}
-              className={`tutorial-nav-item ${activeChapter === ch.id ? 'active' : ''}`}
-              onClick={() => setActiveChapter(ch.id)}
-            >
-              {ch.title}
-            </button>
-          ))}
-        </nav>
+      <nav className="chapter-tabs">
+        {chapters.map(ch => (
+          <button
+            key={ch.id}
+            className={`chapter-tab ${activeChapter === ch.id ? 'active' : ''}`}
+            onClick={() => setActiveChapter(ch.id)}
+          >
+            {ch.title}
+          </button>
+        ))}
+      </nav>
 
-        <div className="tutorial-content">
-          {chapter.sections.map((section, i) => (
-            <div key={i} className="tutorial-section">
-              <h3 className="section-title">{section.title}</h3>
-              <p className="section-content">{section.content}</p>
+      <div className="tutorial-content">
+        {chapter.sections.map((section, i) => (
+          <div key={i} className="tutorial-section">
+            <h3 className="section-title">{section.title}</h3>
+            <p className="section-content">{section.content}</p>
 
-              {section.code && (
-                <div className="code-block">
-                  <SyntaxHighlighter
-                    language="csharp"
-                    style={oneDark}
-                    customStyle={{ margin: 0, borderRadius: '8px', fontSize: '13px', lineHeight: '1.5' }}
-                  >
-                    {section.code}
-                  </SyntaxHighlighter>
-                </div>
-              )}
+            {section.code && (
+              <div className="code-block">
+                <SyntaxHighlighter
+                  language="csharp"
+                  style={oneDark}
+                  customStyle={{ margin: 0, borderRadius: '8px', fontSize: '13px', lineHeight: '1.6' }}
+                >
+                  {section.code}
+                </SyntaxHighlighter>
+              </div>
+            )}
 
-              {section.notes && (
-                <div className="notes-box">
-                  <div className="notes-title">要点总结</div>
-                  <ul className="notes-list">
-                    {section.notes.map((note, j) => (
-                      <li key={j}>{note}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+            {section.notes && (
+              <div className="notes-box">
+                <div className="notes-title">要点总结</div>
+                <ul className="notes-list">
+                  {section.notes.map((note, j) => (
+                    <li key={j}>{note}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   )
